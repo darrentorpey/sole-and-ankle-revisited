@@ -8,21 +8,33 @@ import Select from '../Select';
 import Spacer from '../Spacer';
 import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
+import { BREAKPOINTS } from '../../breakpoints';
 
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
         <Header>
+          <MobileBreadcrumbs>
+            <Breadcrumbs>
+              <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+              <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+              <Breadcrumbs.Crumb href="/sale/shoes">
+                Shoes
+              </Breadcrumbs.Crumb>
+            </Breadcrumbs>
+          </MobileBreadcrumbs>
           <Title>Running</Title>
-          <Select
-            label="Sort"
-            value={sortId}
-            onChange={(ev) => setSortId(ev.target.value)}
-          >
-            <option value="newest">Newest Releases</option>
-            <option value="price">Price</option>
-          </Select>
+          <DesktopOnly>
+            <Select
+              label="Sort"
+              value={sortId}
+              onChange={(ev) => setSortId(ev.target.value)}
+            >
+              <option value="newest">Newest Releases</option>
+              <option value="price">Price</option>
+            </Select>
+          </DesktopOnly>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -49,8 +61,27 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
+const DesktopOnly = styled.div`
+  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+    display: none;
+  }
+`;
+
+const MobileBreadcrumbs = styled.div`
+  display: none;
+  flex: 1 1 100%;
+
+  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+    display: inherit;
+  }
+`;
+
 const LeftColumn = styled.div`
   flex-basis: 248px;
+
+  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+    display: none;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -61,6 +92,7 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  flex-wrap: wrap;
 `;
 
 const Title = styled.h2`

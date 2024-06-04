@@ -6,6 +6,7 @@ import { COLORS } from '../../constants';
 import SearchInput from '../SearchInput';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
+import { BREAKPOINTS } from '../../breakpoints';
 
 const SuperHeader = () => {
   return (
@@ -32,6 +33,14 @@ const Wrapper = styled.div`
   height: 40px;
   padding-left: 32px;
   padding-right: 32px;
+
+  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+    height: 4px;
+
+    > * {
+      display: none;
+    }
+  }
 `;
 
 const MarketingMessage = styled.span`
