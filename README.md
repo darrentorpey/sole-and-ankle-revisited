@@ -100,11 +100,11 @@ Here's our goal:
 As it stands, we have a few colors in our `constants.js` file. When we want to use a color, we import and interpolate it:
 
 ```jsx
-import { COLORS } from '../../constants';
+import { COLORS } from "../../constants"
 
 const Something = styled.p`
-  color: ${COLORS.gray[900]};
-`;
+  color: var(--color-gray-900);
+`
 ```
 
 This works fine, but I personally prefer to use CSS variables for colors. It makes it a bit easier to write:
@@ -112,7 +112,7 @@ This works fine, but I personally prefer to use CSS variables for colors. It mak
 ```jsx
 const Something = styled.p`
   color: var(--color-gray-900);
-`;
+`
 ```
 
 In this exercise, your goal is to update the project to use CSS variables for colors, and optionally font-weights.
