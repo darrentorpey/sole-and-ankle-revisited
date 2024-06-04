@@ -5,17 +5,13 @@ import { COLORS, WEIGHTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
-import { BREAKPOINTS } from '../../breakpoints';
+import { BREAKPOINTS } from '../../constants';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-
-  // For our mobile hamburger menu, we'll want to use a button
-  // with an onClick handler, something like this:
-  //
-  // <button onClick={() => setShowMobileMenu(true)}>
 
   return (
     <header>
@@ -36,14 +32,17 @@ const Header = () => {
           <MobileHolder>
             <UnstyledButton>
               <Icon id="shopping-bag" strokeWidth={2} size={24} />
+              <VisuallyHidden>Open shopping bag</VisuallyHidden>
             </UnstyledButton>
 
             <IconHolder>
               <Icon id="search" strokeWidth={2} size={24} />
+              <VisuallyHidden>Search</VisuallyHidden>
             </IconHolder>
 
-            <UnstyledButton>
+            <UnstyledButton onClick={() => setShowMobileMenu(true)}>
               <Icon id="menu" strokeWidth={2} size={24} />
+              <VisuallyHidden>Open menu</VisuallyHidden>
             </UnstyledButton>
           </MobileHolder>
         </Side>
@@ -53,21 +52,26 @@ const Header = () => {
         isOpen={showMobileMenu}
         onDismiss={() => setShowMobileMenu(false)}
       />
-    </header>
+    </header >
   );
 };
-
-
 
 const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+  @media (max-width: ${BREAKPOINTS.tabletMax}px) {
     justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (max-width: ${BREAKPOINTS.phoneMax}px) {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 `;
 
@@ -76,17 +80,31 @@ const IconHolder = styled.div`
 `;
 
 const MobileHolder = styled.div`
-  display: flex;
-  gap: clamp(1rem, calc(8vw - 1rem), 3rem);
-  justify-content: right;
+  display: none;
+
+  @media (max-width: ${BREAKPOINTS.tabletMax}px) {
+    display: flex;
+    gap: 32px;
+    justify-content: right;
+  }
+
+  @media (max-width: ${BREAKPOINTS.phoneMax}px) {
+    gap: 16px;
+  }
 `;
 
 const Nav = styled.nav`
+  flex: 1 1 100%;
   display: flex;
   gap: 48px;
+  gap: clamp(
+        1rem,
+        calc(9.2vw - 4.5rem),
+        3.5rem
+  );
   margin: 0px 48px;
 
-  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+  @media (max-width: ${BREAKPOINTS.tabletMax}px) {
     display: none;
   }
 `;
@@ -95,7 +113,7 @@ const Side = styled.div`
   flex: 1;
   position: relative;
 
-  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+  @media (max-width: ${BREAKPOINTS.tabletMax}px) {
     flex: 0;
   }
 `;
@@ -104,7 +122,7 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
 
   &:first-of-type {

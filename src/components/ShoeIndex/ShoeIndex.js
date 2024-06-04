@@ -8,7 +8,7 @@ import Select from '../Select';
 import Spacer from '../Spacer';
 import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
-import { BREAKPOINTS } from '../../breakpoints';
+import { BREAKPOINTS } from "../../constants";
 
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
@@ -25,7 +25,7 @@ const ShoeIndex = ({ sortId, setSortId }) => {
             </Breadcrumbs>
           </MobileBreadcrumbs>
           <Title>Running</Title>
-          <DesktopOnly>
+          <PhonesExcluded>
             <Select
               label="Sort"
               value={sortId}
@@ -34,7 +34,7 @@ const ShoeIndex = ({ sortId, setSortId }) => {
               <option value="newest">Newest Releases</option>
               <option value="price">Price</option>
             </Select>
-          </DesktopOnly>
+          </PhonesExcluded>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -61,17 +61,17 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
-const DesktopOnly = styled.div`
-  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+const PhonesExcluded = styled.div`
+  @media (max-width: ${BREAKPOINTS.phoneMax}px) {
     display: none;
   }
 `;
 
 const MobileBreadcrumbs = styled.div`
   display: none;
-  flex: 1 1 100%;
 
-  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+  @media (max-width: ${BREAKPOINTS.tabletMax}px) {
+    flex: 1 1 100%;
     display: inherit;
   }
 `;
@@ -79,7 +79,7 @@ const MobileBreadcrumbs = styled.div`
 const LeftColumn = styled.div`
   flex-basis: 248px;
 
-  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+  @media (max-width: ${BREAKPOINTS.tabletMax}px) {
     display: none;
   }
 `;

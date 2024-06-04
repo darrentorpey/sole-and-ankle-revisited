@@ -6,7 +6,7 @@ import { COLORS } from '../../constants';
 import SearchInput from '../SearchInput';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
-import { BREAKPOINTS } from '../../breakpoints';
+import { BREAKPOINTS } from "../../constants";
 
 const SuperHeader = () => {
   return (
@@ -29,12 +29,12 @@ const Wrapper = styled.div`
   gap: 24px;
   font-size: 0.875rem;
   color: ${COLORS.gray[300]};
-  background-color: ${COLORS.gray[900]};
+  background-color: var(--color-gray-900);
   height: 40px;
   padding-left: 32px;
   padding-right: 32px;
 
-  @media (max-width: ${BREAKPOINTS.laptopMax}px) {
+  @media (max-width: ${BREAKPOINTS.tabletMax}px) {
     height: 4px;
 
     > * {

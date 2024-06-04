@@ -33,7 +33,7 @@ const CrumbLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: ${COLORS.gray[900]};
+    color: var(--color-gray-900);
   }
 `;
 

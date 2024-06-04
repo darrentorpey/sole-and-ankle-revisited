@@ -29,7 +29,7 @@ const Link = styled.a`
   display: block;
   text-decoration: none;
   font-weight: ${WEIGHTS.medium};
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
   line-height: 2;
 `;
 

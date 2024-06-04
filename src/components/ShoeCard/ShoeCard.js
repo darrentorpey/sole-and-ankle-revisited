@@ -90,7 +90,7 @@ const Row = styled.div`
 
 const Name = styled.h3`
   font-weight: ${WEIGHTS.medium};
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
 `;
 
 const Price = styled.span`
